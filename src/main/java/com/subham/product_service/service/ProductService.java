@@ -1,0 +1,45 @@
+package com.subham.product_service.service;
+
+import com.subham.product_service.dto.ProductRequest;
+import com.subham.product_service.dto.ProductResponse;
+import com.subham.product_service.entity.Product;
+import com.subham.product_service.repository.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@Slf4j
+public class ProductService {
+
+  private final ProductRepository productRepository;
+
+  public ProductService(ProductRepository productRepository) {
+    this.productRepository = productRepository;
+  }
+
+  public String createProduct(ProductRequest request) {
+
+    Product product = Product.builder()
+            .name(request.name())
+            .description(request.description())
+            .price(request.price())
+            .build();
+
+    Product savedP = productRepository.save(product);
+    log.info("New Product successfully added with ID: {}", savedP.getId());
+
+    return savedP.getId();
+  }
+
+  public List<ProductResponse> getProducts() {
+    return productRepository.findAll()
+            .stream()
+            .map(product -> new ProductResponse(
+                    product.getId(), product.getName(),
+                    product.getDescription(), product.getPrice()
+            ))
+            .toList();
+  }
+}
