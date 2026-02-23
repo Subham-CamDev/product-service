@@ -3,9 +3,11 @@ package com.subham.product_service.controller;
 import com.subham.product_service.dto.ProductRequest;
 import com.subham.product_service.dto.ProductResponse;
 import com.subham.product_service.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,11 @@ public class ProductController {
     this.productService = productService;
   }
 
+  @Operation(description = "Create a new product by providing the name, description and price in the request body.")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "201", description = "Product Creation Successful"),
+          @ApiResponse(responseCode = "500", description = "Internal Server Error")
+  })
   @PostMapping
   public ResponseEntity<String> createProduct(@RequestBody ProductRequest request) {
     try {
@@ -35,6 +42,11 @@ public class ProductController {
     }
   }
 
+  @Operation(description = "Get the list of all products available in the system.")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Return the list of all products"),
+          @ApiResponse(responseCode = "500", description = "Internal Server Error")
+  })
   @GetMapping
   public ResponseEntity<List<ProductResponse>> getProducts() {
     try {
