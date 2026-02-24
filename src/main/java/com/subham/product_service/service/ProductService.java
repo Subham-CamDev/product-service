@@ -19,9 +19,10 @@ public class ProductService {
     this.productRepository = productRepository;
   }
 
-  public String createProduct(ProductRequest request) {
+  public ProductResponse createProduct(ProductRequest request) {
 
     Product product = Product.builder()
+            .skuCode(request.skuCode())
             .name(request.name())
             .description(request.description())
             .price(request.price())
@@ -30,14 +31,17 @@ public class ProductService {
     Product savedP = productRepository.save(product);
     log.info("New Product successfully added with ID: {}", savedP.getId());
 
-    return savedP.getId();
+    return new ProductResponse(
+            savedP.getId(), savedP.getSkuCode(), savedP.getName(),
+            savedP.getDescription(), savedP.getPrice()
+    );
   }
 
   public List<ProductResponse> getProducts() {
     return productRepository.findAll()
             .stream()
             .map(product -> new ProductResponse(
-                    product.getId(), product.getName(),
+                    product.getId(), product.getSkuCode(), product.getName(),
                     product.getDescription(), product.getPrice()
             ))
             .toList();
