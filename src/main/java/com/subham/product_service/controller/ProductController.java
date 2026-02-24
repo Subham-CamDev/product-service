@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -30,15 +31,13 @@ public class ProductController {
           @ApiResponse(responseCode = "500", description = "Internal Server Error")
   })
   @PostMapping
-  public ResponseEntity<String> createProduct(@RequestBody ProductRequest request) {
+  public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest request) {
     try {
-      String productId = productService.createProduct(request);
-      log.info("Product created with ID : {}", productId);
-      return new ResponseEntity<>("Product Creation Successful",
-              HttpStatus.CREATED);
+      ProductResponse product = productService.createProduct(request);
+      return new ResponseEntity<>(product, HttpStatus.CREATED);
     } catch (Exception e) {
       log.error("Exception occurred while creating a new product", e);
-      return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
 
@@ -51,7 +50,6 @@ public class ProductController {
   public ResponseEntity<List<ProductResponse>> getProducts() {
     try {
       List<ProductResponse> products = productService.getProducts();
-      log.info("The list of products: {}", products);
       return new ResponseEntity<>(products, HttpStatus.OK);
     } catch (Exception e) {
       log.error("Exception occurred while fetching all products", e);
