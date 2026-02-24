@@ -39,7 +39,7 @@ class ProductServiceApplicationTests {
 						.post("/api/product")
 						.then()
 						.statusCode(201)
-						.body(Matchers.equalTo("Product Creation Successful"));
+						.body("name", Matchers.equalTo("Samsung Galaxy A21S"));
 	}
 
 	@Test
