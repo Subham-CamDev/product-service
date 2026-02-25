@@ -1,9 +1,9 @@
-package com.subham.product_service.service;
+package com.subham.microservices.service;
 
-import com.subham.product_service.dto.ProductRequest;
-import com.subham.product_service.dto.ProductResponse;
-import com.subham.product_service.entity.Product;
-import com.subham.product_service.repository.ProductRepository;
+import com.subham.microservices.dto.ProductRequest;
+import com.subham.microservices.dto.ProductResponse;
+import com.subham.microservices.entity.Product;
+import com.subham.microservices.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

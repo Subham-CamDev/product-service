@@ -1,8 +1,8 @@
-package com.subham.product_service.controller;
+package com.subham.microservices.controller;
 
-import com.subham.product_service.dto.ProductRequest;
-import com.subham.product_service.dto.ProductResponse;
-import com.subham.product_service.service.ProductService;
+import com.subham.microservices.dto.ProductRequest;
+import com.subham.microservices.dto.ProductResponse;
+import com.subham.microservices.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController

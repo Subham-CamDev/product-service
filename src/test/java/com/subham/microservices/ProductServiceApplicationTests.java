@@ -1,4 +1,4 @@
-package com.subham.product_service;
+package com.subham.microservices;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
