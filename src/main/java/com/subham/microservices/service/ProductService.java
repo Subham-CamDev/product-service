@@ -46,4 +46,9 @@ public class ProductService {
             ))
             .toList();
   }
+
+  public void deleteAllProducts() {
+    log.info("Deleting all products from the database");
+    productRepository.deleteAll();
+  }
 }
