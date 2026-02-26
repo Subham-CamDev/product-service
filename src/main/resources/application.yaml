@@ -1,7 +1,20 @@
 spring:
   application:
-    name: Product Service
+    name: product-service
 
   data:
     mongodb:
       uri: mongodb://root:password@localhost:27017/product-service?authSource=admin
+
+#Eureka client configuration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 8080
