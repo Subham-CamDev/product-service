@@ -55,4 +55,20 @@ public class ProductController {
       return new ResponseEntity<>(List.of(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @Operation(description = "Deletes all products from the system.")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Return the success message"),
+          @ApiResponse(responseCode = "500", description = "Internal Server Error")
+  })
+  @DeleteMapping
+  public ResponseEntity<String> deleteAllProducts() {
+    try {
+      productService.deleteAllProducts();
+      return new ResponseEntity<>("All products deleted successfully", HttpStatus.OK);
+    } catch (Exception e) {
+      log.error("Exception occurred while deleting all products", e);
+      return new ResponseEntity<>("Failed to delete products", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
